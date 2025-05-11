@@ -16,7 +16,7 @@ namespace CQRS.MEDIATOR.V2.API.EntitiesModelBuilder
             builder.Property(e => e.CreatedAt).HasDefaultValueSql("GETDATE()");
             builder.Property(e => e.LastUpdatedBy).IsRequired(false).HasMaxLength(100);
             builder.Property(e => e.LastUpdatedAt).HasDefaultValueSql("GETDATE()").ValueGeneratedOnUpdate();
-            builder.Property(e => e.RowGuid).ValueGeneratedOnAdd().HasDefaultValueSql("NEWID()").HasMaxLength(35);
+            builder.Property(e => e.RowGuid).ValueGeneratedOnAdd().HasDefaultValueSql("NEWID()");
             builder.Property(e => e.Deleted).HasDefaultValue(false);
             builder.HasData(
                 new Status
@@ -25,21 +25,13 @@ namespace CQRS.MEDIATOR.V2.API.EntitiesModelBuilder
                     Name = "Active",
                     Description = "The item is active.",
                     CreatedBy = "System",
-                    CreatedAt = DateTime.UtcNow,
-                    LastUpdatedBy = "System",
-                    LastUpdatedAt = DateTime.UtcNow,
-                    RowGuid = Guid.NewGuid().ToString(),
                     Deleted = false
-                }, new Status 
+                }, new Status
                 {
                     StatusId = 2,
                     Name = "Pending",
                     Description = "The item is active.",
                     CreatedBy = "System",
-                    CreatedAt = DateTime.UtcNow,
-                    LastUpdatedBy = "System",
-                    LastUpdatedAt = DateTime.UtcNow,
-                    RowGuid = Guid.NewGuid().ToString(),
                     Deleted = false
                 }, new Status
                 {
@@ -47,10 +39,6 @@ namespace CQRS.MEDIATOR.V2.API.EntitiesModelBuilder
                     Name = "On Progress",
                     Description = "The item is active.",
                     CreatedBy = "System",
-                    CreatedAt = DateTime.UtcNow,
-                    LastUpdatedBy = "System",
-                    LastUpdatedAt = DateTime.UtcNow,
-                    RowGuid = Guid.NewGuid().ToString(),
                     Deleted = false
                 }, new Status
                 {
@@ -58,10 +46,6 @@ namespace CQRS.MEDIATOR.V2.API.EntitiesModelBuilder
                     Name = "Completed",
                     Description = "The item is active.",
                     CreatedBy = "System",
-                    CreatedAt = DateTime.UtcNow,
-                    LastUpdatedBy = "System",
-                    LastUpdatedAt = DateTime.UtcNow,
-                    RowGuid = Guid.NewGuid().ToString(),
                     Deleted = false
                 }, new Status
                 {
@@ -69,10 +53,6 @@ namespace CQRS.MEDIATOR.V2.API.EntitiesModelBuilder
                     Name = "Cancelled",
                     Description = "The item is active.",
                     CreatedBy = "System",
-                    CreatedAt = DateTime.UtcNow,
-                    LastUpdatedBy = "System",
-                    LastUpdatedAt = DateTime.UtcNow,
-                    RowGuid = Guid.NewGuid().ToString(),
                     Deleted = false
                 }, new Status
                 {
@@ -80,10 +60,6 @@ namespace CQRS.MEDIATOR.V2.API.EntitiesModelBuilder
                     Name = "Deleted",
                     Description = "The item is active.",
                     CreatedBy = "System",
-                    CreatedAt = DateTime.UtcNow,
-                    LastUpdatedBy = "System",
-                    LastUpdatedAt = DateTime.UtcNow,
-                    RowGuid = Guid.NewGuid().ToString(),
                     Deleted = false
                 }, new Status
                 {
@@ -91,10 +67,6 @@ namespace CQRS.MEDIATOR.V2.API.EntitiesModelBuilder
                     Name = "Archived",
                     Description = "The item is active.",
                     CreatedBy = "System",
-                    CreatedAt = DateTime.UtcNow,
-                    LastUpdatedBy = "System",
-                    LastUpdatedAt = DateTime.UtcNow,
-                    RowGuid = Guid.NewGuid().ToString(),
                     Deleted = false
                 }, new Status
                 {
@@ -102,10 +74,6 @@ namespace CQRS.MEDIATOR.V2.API.EntitiesModelBuilder
                     Name = "In Review",
                     Description = "The item is active.",
                     CreatedBy = "System",
-                    CreatedAt = DateTime.UtcNow,
-                    LastUpdatedBy = "System",
-                    LastUpdatedAt = DateTime.UtcNow,
-                    RowGuid = Guid.NewGuid().ToString(),
                     Deleted = false
                 }
                 );
