@@ -25,6 +25,7 @@ builder.Services.AddDbContext<ApplicationDataBaseContext>(opt => {
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IStatusService, StatusService>();
+builder.Services.AddScoped<ITodoItemService, TodoItemService>();
 builder.Services.AddScoped<IValidator<StatusCreateRequest>, StatusCreateRequestValidator>();
 builder.Services.AddScoped<IValidator<StatusUpdateRequest>, StatusUpdateRequestValidator>();
 

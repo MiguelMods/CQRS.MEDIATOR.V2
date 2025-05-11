@@ -19,6 +19,12 @@ namespace CQRS.MEDIATOR.V2.API.Services.Implementations
         public async Task<TodoItem> AddAsync(TodoItem entity)
         {
             var todoItem = await TodoItemRepository.AddAsync(entity);
+
+            var status = await UnitOfWork.GetRepository<Status>().GetByAsync(x => x.Name == "Pending") ?? throw new Exception("Status not found");
+
+            todoItem.StatusId = status.StatusId;
+            todoItem.CreatedBy = "System";
+
             var result = await UnitOfWork.SaveChangesAsync();
 
             if (result)
@@ -41,6 +47,9 @@ namespace CQRS.MEDIATOR.V2.API.Services.Implementations
             {
                 todoItem.EndDate = todoItem.EndDate == null ? DateTime.Now : todoItem.EndDate;
             }
+
+            var status = await UnitOfWork.GetRepository<Status>().GetByAsync(x => x.StatusId == entity.StatusId) ?? throw new Exception("Status not found");
+            todoItem.StatusId = status.StatusId;
 
             var result = await TodoItemRepository.UpdateAsync(todoItem);
             var saveResult = await UnitOfWork.SaveChangesAsync();

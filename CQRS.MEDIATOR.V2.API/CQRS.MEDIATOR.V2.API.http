@@ -45,3 +45,12 @@ Content-type: application/json
   "name": "Activo",
   "description": "Actualizado"
 }
+
+
+### POST a new todo item
+Get {{test}}/create
+Accept: application/json
+
+###
+Get {{test}}/todoitem
+Accept: application/json
