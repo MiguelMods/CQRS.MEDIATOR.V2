@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CQRS.MEDIATOR.V2.API.ModelBuilder
+namespace CQRS.MEDIATOR.V2.API.EntitiesModelBuilder
 {
     public class TodoItemModelBuilder : IEntityTypeConfiguration<TodoItem>
     {

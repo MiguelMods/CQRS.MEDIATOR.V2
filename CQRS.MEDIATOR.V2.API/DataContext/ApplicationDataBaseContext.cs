@@ -1,5 +1,5 @@
 ﻿using CQRS.MEDIATOR.V2.API.Entities;
-using CQRS.MEDIATOR.V2.API.ModelBuilder;
+using CQRS.MEDIATOR.V2.API.EntitiesModelBuilder;
 using Microsoft.EntityFrameworkCore;
 
 namespace CQRS.MEDIATOR.V2.API.DataContext
