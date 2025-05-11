@@ -26,3 +26,14 @@ Content-type: application/json
   "name": "Active",
   "description": "Test"
 }
+
+
+### POST con error
+PUT {{test}}/statuses
+Accept: application/json
+Content-type: application/json
+{
+  "StatusId": 1,
+  "name": "Activo",
+  "description": "Actualizado"
+}

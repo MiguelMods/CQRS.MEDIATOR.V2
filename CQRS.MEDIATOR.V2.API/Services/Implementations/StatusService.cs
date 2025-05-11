@@ -31,9 +31,27 @@ namespace CQRS.MEDIATOR.V2.API.Services.Implementations
 
             throw new Exception("Error while saving changes");
         }
-        public Task<Status> UpdateAsync(Status entity)
+        public async Task<Status> UpdateAsync(Status entity)
         {
-            throw new NotImplementedException();
+            var nameIsTaked =  await StatusRepository.GetByAsync(x => x.Name.ToLower() == entity.Name.ToLower() && x.StatusId != entity.StatusId);
+
+            if (nameIsTaked != null)
+                throw new Exception("Name is already taken");
+
+            var status = await StatusRepository.GetByAsync(x => x.StatusId == entity.StatusId) ?? throw new Exception("Status not found");
+
+            status.Name = entity.Name;
+            status.Description = entity.Description;
+            status.Active = entity.Active;
+            status.LastUpdatedBy = "System";
+
+            var result = await StatusRepository.UpdateAsync(status);
+            var saveResult = await UnitOfWork.SaveChangesAsync();
+
+            if (saveResult)
+                return status;
+
+            throw new Exception("Error while saving changes");
         }
         public Task<bool> DeleteByAsync(Expression<Func<Status, bool>> expression)
         {
@@ -42,15 +60,15 @@ namespace CQRS.MEDIATOR.V2.API.Services.Implementations
         public async Task<bool> UpdateActiveStatusOnlyAsync(long Id, bool active)
         {
             var status = await StatusRepository.GetByAsync(x => x.StatusId == Id) ?? throw new Exception("Status not found");
-            
+
             status.Active = !active;
 
             var result = await StatusRepository.UpdateAsync(status);
             var saveResult = await UnitOfWork.SaveChangesAsync();
-            
+
             if (saveResult)
                 return true;
-            
+
             throw new Exception("Error while saving changes");
         }
     }
