@@ -1,4 +1,5 @@
 ﻿using CQRS.MEDIATOR.V2.API.Entities;
+using CQRS.MEDIATOR.V2.API.ModelBuilder;
 using Microsoft.EntityFrameworkCore;
 
 namespace CQRS.MEDIATOR.V2.API.DataContext
@@ -7,5 +8,11 @@ namespace CQRS.MEDIATOR.V2.API.DataContext
     {
         public DbSet<Status> Statuses { get; set; }
         public DbSet<TodoItem> TodoItems { get; set; }
+
+        protected override void OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new StatusModelBuilder());
+            modelBuilder.ApplyConfiguration(new TodoItemModelBuilder());
+        }
     }
 }
