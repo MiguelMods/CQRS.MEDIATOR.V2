@@ -27,6 +27,14 @@ Content-type: application/json
   "description": "Test"
 }
 
+### POST por modelo nulo error
+POST {{test}}/statuses
+Accept: application/json
+Content-type: application/json
+{
+  "description": "Test"
+}
+
 
 ### POST con error
 PUT {{test}}/statuses

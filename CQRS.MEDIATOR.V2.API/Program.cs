@@ -1,15 +1,22 @@
 using CQRS.MEDIATOR.V2.API.DataContext;
+using CQRS.MEDIATOR.V2.API.Filters;
+using CQRS.MEDIATOR.V2.API.Models.Request;
+using CQRS.MEDIATOR.V2.API.Models.Validator;
 using CQRS.MEDIATOR.V2.API.Repositories.Contracs;
 using CQRS.MEDIATOR.V2.API.Repositories.Implementations;
 using CQRS.MEDIATOR.V2.API.Services.Contract;
 using CQRS.MEDIATOR.V2.API.Services.Implementations;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<RequestModelValidatorFilter>();
+});
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<ApplicationDataBaseContext>(opt => { 
@@ -18,6 +25,8 @@ builder.Services.AddDbContext<ApplicationDataBaseContext>(opt => {
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IStatusService, StatusService>();
+builder.Services.AddScoped<IValidator<StatusCreateRequest>, StatusCreateRequestValidator>();
+builder.Services.AddScoped<IValidator<StatusUpdateRequest>, StatusUpdateRequestValidator>();
 
 var app = builder.Build();
 
