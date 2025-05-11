@@ -1,6 +1,28 @@
 @CQRS.MEDIATOR.V2.API_HostAddress = http://localhost:5133
+@test = {{CQRS.MEDIATOR.V2.API_HostAddress}}/api/test
 
-GET {{CQRS.MEDIATOR.V2.API_HostAddress}}/weatherforecast/
+### Obtener todos
+GET {{test}}/statuses
 Accept: application/json
 
-###
+### Obtener por ID
+GET {{test}}/statuses/1
+Accept: application/json
+
+### POST
+POST {{test}}/statuses
+Accept: application/json
+Content-type: application/json
+{
+  "name": "Test",
+  "description": "Test"
+}
+
+### POST con error
+POST {{test}}/statuses
+Accept: application/json
+Content-type: application/json
+{
+  "name": "Active",
+  "description": "Test"
+}
