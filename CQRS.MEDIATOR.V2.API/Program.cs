@@ -31,6 +31,8 @@ builder.Services.AddScoped<IValidator<StatusUpdateRequest>, StatusUpdateRequestV
 builder.Services.AddScoped<IValidator<TodoItemCreateRequest>, TodoItemCreateRequestValidator>();
 builder.Services.AddScoped<IValidator<TodoItemUpdateDateRequest>, TodoItemUpdateDateRequestValidator>();
 builder.Services.AddScoped<IValidator<TodoItemUpdateRequest>, TodoItemUpdateRequestValidator>();
+//Mediator, copiado desde el nugget package
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 var app = builder.Build();
 
