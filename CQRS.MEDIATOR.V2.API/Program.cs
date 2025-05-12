@@ -28,6 +28,9 @@ builder.Services.AddScoped<IStatusService, StatusService>();
 builder.Services.AddScoped<ITodoItemService, TodoItemService>();
 builder.Services.AddScoped<IValidator<StatusCreateRequest>, StatusCreateRequestValidator>();
 builder.Services.AddScoped<IValidator<StatusUpdateRequest>, StatusUpdateRequestValidator>();
+builder.Services.AddScoped<IValidator<TodoItemCreateRequest>, TodoItemCreateRequestValidator>();
+builder.Services.AddScoped<IValidator<TodoItemUpdateDateRequest>, TodoItemUpdateDateRequestValidator>();
+builder.Services.AddScoped<IValidator<TodoItemUpdateRequest>, TodoItemUpdateRequestValidator>();
 
 var app = builder.Build();
 
