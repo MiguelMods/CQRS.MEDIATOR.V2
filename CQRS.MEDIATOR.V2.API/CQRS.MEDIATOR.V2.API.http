@@ -3,7 +3,7 @@
 @todoitem = {{CQRS.MEDIATOR.V2.API_HostAddress}}/api/todoitem
 
 ### Get All todo items
-GET {{todoitem}}
+GET {{todoitem}}/true
 Accept: application/json
 
 ### Get todo item by id 
