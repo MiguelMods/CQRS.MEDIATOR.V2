@@ -8,6 +8,7 @@ using CQRS.MEDIATOR.V2.API.Services.Contract;
 using CQRS.MEDIATOR.V2.API.Services.Implementations;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using TodoWebApi.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<RequestModelValidatorFilter>();
+    options.Filters.Add<GlobalExceptionFilter>();
 });
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
