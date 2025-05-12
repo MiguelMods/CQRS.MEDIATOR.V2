@@ -8,7 +8,6 @@ using CQRS.MEDIATOR.V2.API.Services.Contract;
 using CQRS.MEDIATOR.V2.API.Services.Implementations;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using TodoWebApi.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
