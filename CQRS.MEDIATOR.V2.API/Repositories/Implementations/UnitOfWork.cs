@@ -7,6 +7,7 @@ namespace CQRS.MEDIATOR.V2.API.Repositories.Implementations
     {
         public IGenericRepository<TEntity> GetRepository<TEntity>() where TEntity : class
             => new GenericRepository<TEntity>(context);
+        public ITodoItemRepository TodoItemRepository { get; } = new TodoItemRepository(context);
         public async Task<bool> SaveChangesAsync()
             => await context.SaveChangesAsync() > 0;
         public void Dispose()
