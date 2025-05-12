@@ -1,5 +1,4 @@
-﻿using CQRS.MEDIATOR.V2.API.Entities;
-using CQRS.MEDIATOR.V2.API.Models;
+﻿using CQRS.MEDIATOR.V2.API.Models;
 using CQRS.MEDIATOR.V2.API.Models.Request;
 using CQRS.MEDIATOR.V2.API.QuerysAndCommands;
 using MediatR;
@@ -17,7 +16,7 @@ namespace CQRS.MEDIATOR.V2.API.Controllers
             var result = await mediator.Send(new GetAllTodoITemsQuery(includeStatus));
 
             if (result == null)
-                return NotFound(Result<IEnumerable<TodoItem>>.Failure([], "data not avaible"));
+                return NotFound(Result<string>.Failure("data not avaible"));
 
             return Ok(result);
         }
@@ -27,7 +26,8 @@ namespace CQRS.MEDIATOR.V2.API.Controllers
         {
             var result = await mediator.Send(new GetTodoItemByIdQuery(id, includeStatus));
             if (result == null)
-                return NotFound(Result<TodoItem>.Failure("data not avaible"));
+                return NotFound(Result<bool>.Failure("data not avaible"));
+
             return Ok(result);
         }
 
@@ -37,7 +37,7 @@ namespace CQRS.MEDIATOR.V2.API.Controllers
             var result = await mediator.Send(new GetAllTodoItemsByStatusIdQuery(statusId));
 
             if (result == null)
-                return NotFound(Result<IEnumerable<TodoItem>>.Failure("data not avaible"));
+                return NotFound(Result<bool>.Failure("data not avaible"));
 
             return Ok(result);
         }
@@ -48,7 +48,7 @@ namespace CQRS.MEDIATOR.V2.API.Controllers
             var result = await mediator.Send(new CreateTodoItemCommand(request.Title, request.Description, request.IsCompleted, request.StartDate, request.EndDate));
 
             if (result == null)
-                return NotFound(Result<TodoItem>.Failure("data not avaible"));
+                return NotFound(Result<bool>.Failure("data not avaible"));
 
             if (!result.IsSuccess)
                 return BadRequest(result);
@@ -62,7 +62,7 @@ namespace CQRS.MEDIATOR.V2.API.Controllers
             var result = await mediator.Send(new UpdateTodoItemCommand(request.TodoItemId, request.Title, request.Description, request.IsCompleted, request.StartDate, request.EndDate));
 
             if (result == null)
-                return NotFound(Result<TodoItem>.Failure("data not avaible"));
+                return NotFound(Result<bool>.Failure("data not avaible"));
 
             return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
