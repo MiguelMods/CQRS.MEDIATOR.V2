@@ -1,5 +1,22 @@
 @CQRS.MEDIATOR.V2.API_HostAddress = http://localhost:5133
 @test = {{CQRS.MEDIATOR.V2.API_HostAddress}}/api/test
+@todoitem = {{CQRS.MEDIATOR.V2.API_HostAddress}}/api/todoitem
+
+### Get All todo items
+GET {{todoitem}}
+Accept: application/json
+
+### Get todo item by id 
+GET {{todoitem}}/4
+Accept: application/json
+
+### Get todo item by id 
+GET {{todoitem}}/status/2
+Accept: application/json
+
+### Obtener por ID
+PUT {{todoitem}}/4/status/3
+Accept: application/json
 
 ### Obtener todos
 GET {{test}}/statuses
