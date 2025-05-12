@@ -18,6 +18,16 @@ Accept: application/json
 PUT {{todoitem}}/4/status/3
 Accept: application/json
 
+### Obtener por ID
+POST {{todoitem}}
+Accept: application/json
+Content-type: application/json
+{
+  "title": "Test true",
+  "description": "Test true true",
+  "isCompleted": true
+}
+
 ### Obtener todos
 GET {{test}}/statuses
 Accept: application/json
