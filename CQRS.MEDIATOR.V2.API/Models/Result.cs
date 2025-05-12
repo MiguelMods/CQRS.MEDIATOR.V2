@@ -14,9 +14,9 @@
                 Message = string.Empty
             };
         }
-        public static Result<bool> Failure(string? message)
+        public static Result<Type> Failure(string? message)
         {
-            return new Result<bool>
+            return new Result<Type>
             {
                 IsSuccess = false,
                 Data = default,

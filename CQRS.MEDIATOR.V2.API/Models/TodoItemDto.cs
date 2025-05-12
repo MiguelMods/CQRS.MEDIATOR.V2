@@ -2,22 +2,28 @@
 
 namespace CQRS.MEDIATOR.V2.API.Models
 {
-    public class TodoItemDto
+    public record TodoItemDto(long TodoItemId, string? Title, string? Description, bool IsCompleted, DateTime? StartDate, DateTime? EndDate, long StatusId, StatusDto? Status, bool Active, string? CreatedBy, DateTime CreatedAt, string? LastUpdatedBy, DateTime? LastUpdatedAt, Guid? RowGuid, bool Deleted) 
     {
-        public long TodoItemId { get; set; }
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        public bool IsCompleted { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public long StatusId { get; set; }
-        public virtual Status Status { get; set; }
-        public bool Active { get; set; }
-        public string? CreatedBy { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public string? LastUpdatedBy { get; set; }
-        public DateTime? LastUpdatedAt { get; set; }
-        public Guid? RowGuid { get; set; }
-        public bool Deleted { get; set; }
+        public static TodoItemDto Map(TodoItem todoItem)
+            => new
+            (
+                todoItem.TodoItemId,
+                todoItem.Title,
+                todoItem.Description,
+                todoItem.IsCompleted,
+                todoItem.StartDate,
+                todoItem.EndDate,
+                todoItem.StatusId,
+                todoItem.Status != null ? 
+                new (todoItem.Status.StatusId, todoItem.Status.Name, todoItem.Status.Description, todoItem.Status.Active, todoItem.Status.CreatedBy, todoItem.Status.CreatedAt, todoItem.Status.LastUpdatedBy, todoItem.Status.LastUpdatedAt, todoItem.Status.RowGuid, todoItem.Status.Deleted)
+                : null,
+                todoItem.Active,
+                todoItem.CreatedBy,
+                todoItem.CreatedAt,
+                todoItem.LastUpdatedBy,
+                todoItem.LastUpdatedAt,
+                todoItem.RowGuid,
+                todoItem.Deleted
+            );
     }
 }
