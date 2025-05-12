@@ -4,7 +4,7 @@ using MediatR;
 
 namespace CQRS.MEDIATOR.V2.API.QuerysAndCommands
 {
-    public class UpdateTodoItemCommand(long TodoItemId, string? Title, string? Description, bool IsCompleted, DateTime? StartDate, DateTime? EndDate) : IRequest<Result<TodoItem>>
+    public class UpdateTodoItemCommand(long TodoItemId, string? Title, string? Description, bool IsCompleted, DateTime? StartDate, DateTime? EndDate) : IRequest<Result<TodoItemDto>>
     {
         public long TodoItemId { get; } = TodoItemId;
         public string? Title { get; } = Title;

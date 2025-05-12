@@ -5,12 +5,13 @@ using MediatR;
 
 namespace CQRS.MEDIATOR.V2.API.QuerysAndCommands
 {
-    public class GetAllTodoItemsByStatusIdQueryHandler(ITodoItemRepository todoItemRepository) : IRequestHandler<GetAllTodoItemsByStatusIdQuery, Result<IEnumerable<TodoItem>>>
+    public class GetAllTodoItemsByStatusIdQueryHandler(ITodoItemRepository todoItemRepository) : IRequestHandler<GetAllTodoItemsByStatusIdQuery, Result<IEnumerable<TodoItemDto>>>
     {
-        public async Task<Result<IEnumerable<TodoItem>>> Handle(GetAllTodoItemsByStatusIdQuery request, CancellationToken cancellationToken)
+        public async Task<Result<IEnumerable<TodoItemDto>>> Handle(GetAllTodoItemsByStatusIdQuery request, CancellationToken cancellationToken)
         {
             var result = await todoItemRepository.GetAllByStatusIdAsync(request.StatusId);
-            return Result<IEnumerable<TodoItem>>.Success(result);
+            var resultDto = result.Select(TodoItemDto.Map);
+            return Result<IEnumerable<TodoItemDto>>.Success(resultDto);
         }
     }
 }

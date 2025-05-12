@@ -5,17 +5,19 @@ using MediatR;
 
 namespace CQRS.MEDIATOR.V2.API.QuerysAndCommands
 {
-    public class GetTodoItemByIdQueryHandle(ITodoItemService todoItemService) : IRequestHandler<GetTodoItemByIdQuery, Result<TodoItem>>
+    public class GetTodoItemByIdQueryHandle(ITodoItemService todoItemService) : IRequestHandler<GetTodoItemByIdQuery, Result<TodoItemDto>>
     {
-        public async Task<Result<TodoItem>> Handle(GetTodoItemByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Result<TodoItemDto>> Handle(GetTodoItemByIdQuery request, CancellationToken cancellationToken)
         {
             var result = request.IncludeStatus
                 ? await todoItemService.GetByIdWithStatusAsync(request.Id)
                 : await todoItemService.GetByAsync(x => x.TodoItemId == request.Id);
 
+            var resultDto = TodoItemDto.Map(result);
+
             return result == null
-                ? Result<TodoItem>.Failure(new(), "data not available")
-                : Result<TodoItem>.Success(result);
+                ? Result<TodoItemDto>.Failure("data not available")
+                : Result<TodoItemDto>.Success(resultDto);
         }
     }
 }
